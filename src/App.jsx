@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { db } from "./firebase";
 import { ref, push, onValue } from "firebase/database";
+import Merchant from "./Merchant";
 
-function App() {
+function CustomerApp() {
   const foods = [
     {
       id: 1,
@@ -123,7 +125,6 @@ function App() {
       return;
     }
 
-    // PUSH ORDER TO FIREBASE DATABASE
     const ordersRef = ref(db, "orders");
     const newOrderRef = push(ordersRef, {
       customerName: customer.name,
@@ -276,6 +277,22 @@ function App() {
         </div>
       )}
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <nav style={{ background: "#111", padding: "10px", textAlign: "center", display: "flex", justifyContent: "center", gap: "20px" }}>
+        <Link to="/" style={{ color: "#fff", textDecoration: "none", fontWeight: "bold" }}>📱 Customer App</Link>
+        <Link to="/merchant" style={{ color: "#2ed573", textDecoration: "none", fontWeight: "bold" }}>🏪 Merchant Dashboard</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<CustomerApp />} />
+        <Route path="/merchant" element={<Merchant />} />
+      </Routes>
+    </Router>
   );
 }
 
