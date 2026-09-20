@@ -117,11 +117,11 @@ function CustomerApp() {
 
   const handlePlaceOrder = () => {
     if (cart.length === 0) {
-      alert("Cart empty! Age food add kor.");
+      alert("Cart empty! Add your food.");
       return;
     }
     if (!customer.name || !customer.phone) {
-      alert("Name and Phone Number puron kor!");
+      alert("Name and Phone Number required!");
       return;
     }
 
